@@ -20,6 +20,7 @@
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
     <h3>Ecosystem</h3>
+    <Smoothie />
     <ul>
       <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
       <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
@@ -31,8 +32,14 @@
 </template>
 
 <script>
+
+import Smoothie from '../assets/icons/smoothie.svg'
+
 export default {
   name: 'HelloWorld',
+  components: {
+    Smoothie
+  },
   props: {
     msg: String
   }
@@ -53,6 +60,11 @@ li {
   margin: 0 10px;
   a {
     color: @pink;
+  }
+}
+svg{
+  path{
+    fill:#d11a1a;
   }
 }
 </style>
