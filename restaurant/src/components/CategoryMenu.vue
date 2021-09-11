@@ -1,8 +1,7 @@
 <template>
   <div class="category-menu">
     <ul>
-      <li  v-for="category in categoriesList"
-                :key="category.id">
+      <li  v-for="category in categoriesList" :key="category.id" @click="onCategoryClick(category.id)">
         <component :is="category.icon" />
         <p> {{ category.label }} </p>
       </li>
@@ -35,12 +34,35 @@ export default {
         {label: 'Doces', icon: 'Deserts', id: 'deserts'},
         {label: 'Combos', icon: 'Combo', id: 'combo'},
         {label: 'Burguers', icon: 'Burguer', id: 'burguer'}
-      ]
+      ],
+      selectedCategory: 'pizza'
+    }
+  },
+  methods: {
+    onCategory() {
+      
     }
   }
 }
 </script>
 <style lang="less" scoped>
-
+.category-menu{
+  width: 130px;
+  height: 100vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  ul{
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    li{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
   
 </style>
