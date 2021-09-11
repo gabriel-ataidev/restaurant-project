@@ -1,68 +1,96 @@
 <template>
   <div class="category-menu">
     <ul>
-      <li  v-for="category in categoriesList" :key="category.id" @click="onCategoryClick(category.id)">
+      <li
+        v-for="category in categoriesList"
+        :key="category.id"
+        @click="onCategoryClick(category.id)"
+        :class="{ active: isActive(category.id) }"
+      >
         <component :is="category.icon" />
-        <p> {{ category.label }} </p>
+        <p>{{ category.label }}</p>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-
-  import Pizza from '../assets/icons/pizza.svg';
-  import Combo from '../assets/icons/french-fries.svg';
-  import Deserts from '../assets/icons/ice-cream.svg';
-  import Drinks from '../assets/icons/smoothie.svg';
-  import Burguer from '../assets/icons/food.svg';
+import Pizza from "../assets/icons/pizza.svg";
+import Combo from "../assets/icons/french-fries.svg";
+import Deserts from "../assets/icons/ice-cream.svg";
+import Drinks from "../assets/icons/smoothie.svg";
+import Burguer from "../assets/icons/food.svg";
 
 export default {
-  name: 'CategoryMenu',
+  name: "CategoryMenu",
   components: {
     Pizza,
     Combo,
     Deserts,
     Drinks,
-    Burguer   
+    Burguer,
   },
   data() {
     return {
       categoriesList: [
-        {label: 'Pizza', icon: 'Pizza', id: 'pizza'},
-        {label: 'Bebidas', icon: 'Drinks', id: 'drinks'},
-        {label: 'Doces', icon: 'Deserts', id: 'deserts'},
-        {label: 'Combos', icon: 'Combo', id: 'combo'},
-        {label: 'Burguers', icon: 'Burguer', id: 'burguer'}
+        { label: "Pizza", icon: "Pizza", id: "pizza" },
+        { label: "Bebidas", icon: "Drinks", id: "drinks" },
+        { label: "Doces", icon: "Deserts", id: "deserts" },
+        { label: "Combos", icon: "Combo", id: "combo" },
+        { label: "Burguers", icon: "Burguer", id: "burguer" },
       ],
-      selectedCategory: 'pizza'
-    }
+      selectedCategory: "pizza",
+    };
   },
   methods: {
-    onCategory() {
-      
-    }
-  }
-}
+    onCategoryClick(id) {
+      this.selectedCategory = id;
+    },
+    isActive(id) {
+      return this.selectedCategory === id;
+    },
+  },
+};
 </script>
 <style lang="less" scoped>
-.category-menu{
+.category-menu {
   width: 130px;
   height: 100vh;
   background: white;
   display: flex;
   align-items: center;
-  ul{
+  ul {
     list-style: none;
     padding: 0;
     width: 100%;
-    li{
+    li {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+      p{
+        margin-bottom: 0px;
+        font-weight: 500;
+        font-size: 14px;
+        color: @dark-grey;
+        transition: all 0.25s ease-in-out;
+      }
+      &.active{
+        background: @yellow;
+        border-radius: 10px;
+        p{
+          color: #000;
+        }
+        svg{
+          path{
+            fill: #000;
+          }
+        }
+      }
     }
   }
 }
-  
 </style>
