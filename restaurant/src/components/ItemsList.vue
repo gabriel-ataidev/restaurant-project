@@ -1,18 +1,22 @@
 <template>
   <div class="items-list">
-    {{ itemsList }}
+    <Item v-for="item in itemsList" :key="item.id" :item="item" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Item from "./Item";
 
 export default {
   name: "ItemsList",
+  components: {
+    Item,
+  },
   data() {
-      return {
-          itemsList: []
-      }
+    return {
+      itemsList: [],
+    };
   },
   created() {
     axios.get("http://localhost:3000/burguers").then((response) => {
