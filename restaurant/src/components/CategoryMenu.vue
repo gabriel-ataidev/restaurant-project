@@ -92,5 +92,18 @@ export default {
       }
     }
   }
+
+  @media @smartphones {
+    width: 100%;
+    height: fit-content;
+    ul{
+      display: flex;
+      margin: 10px;
+      overflow: scroll;
+      li{
+        min-width: 78px;
+      }
+    }
+  }
 }
 </style>
