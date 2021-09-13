@@ -1,5 +1,6 @@
 <template>
   <div class="items-list">
+    <Loading />
     <Item v-for="item in itemsList" :key="item.id" :item="item" />
   </div>
 </template>
@@ -7,11 +8,13 @@
 <script>
 import axios from "axios";
 import Item from "./Item";
+import Loading from './Loading';
 
 export default {
   name: "ItemsList",
   components: {
     Item,
+    Loading
   },
   data() {
     return {
