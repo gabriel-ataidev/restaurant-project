@@ -69,8 +69,8 @@
     },
     {
       "id": 3,
-      "name": "Milshake",
-      "description": "Milskahe de chocolate",
+      "name": "Milkshake",
+      "description": "Milkskahe de chocolate",
       "price": 10.0,
       "offer": false
     }
