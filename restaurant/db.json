@@ -25,7 +25,7 @@
       "id": 4,
       "name": "Picanha Burguer",
       "description": "Pão, maionese, 1 hamburguer de picanha, alface e tomate",
-      "price": 40.3,
+      "price": 40.5,
       "offer": false
     }
   ],
@@ -34,8 +34,8 @@
       "id": 1,
       "name": "Calabresa",
       "description": "Molho de tomate, calabresa e queijo",
-      "price": 25.0,
-      "offer": false
+      "price": 22.5,
+      "offer": true
     },
     {
       "id": 2,
@@ -58,7 +58,7 @@
       "name": "Casquinha mista",
       "description": "Casquinha mista de creme e chocolate",
       "price": 4.5,
-      "offer": false
+      "offer": true
     },
     {
       "id": 2,
@@ -87,8 +87,8 @@
       "id": 2,
       "name": "Guaraná Lata",
       "description": "Lata 350ml",
-      "price": 4.5,
-      "offer": false
+      "price": 3.5,
+      "offer": true
     }
   ],
   "combo": [
