@@ -19,10 +19,27 @@ export default {
     };
   },
   created() {
-    axios.get("http://localhost:3000/burguers").then((response) => {
-      this.itemsList = response.data;
-    });
+    
   },
+  computed: {
+    selectedCategory: {
+      get(){
+        return this.$store.state.selectedCategory;
+      }
+    }
+  },
+  methods: {
+    getItemsList() {
+        axios.get(`http://localhost:3000/${this.selectedCategory}`).then((response) => {
+        this.itemsList = response.data;
+      });
+    }
+  },
+  watch: {
+    selectedCategory() {
+      this.getItemsList();
+    }
+  }
 };
 </script>
 
