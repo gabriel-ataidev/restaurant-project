@@ -1,10 +1,14 @@
 <template>
   <div class="item">
-      <div class="item--tag" v-if="item.offer">Oferta</div>
-      <img class="item--img" src="../assets/images/burguer.png" alt="burguer">
-      <h2 class="item--name">{{ item.name }}</h2>
-      <p class="item--description">{{ item.description }}</p>
-      <p class="item--price">{{ item.price | currency}}</p>
+      <div class="container">
+          <div class="item--tag" v-if="item.offer">Oferta</div>
+          <img class="item--img" src="../assets/images/burguer.png" alt="burguer">
+      </div>
+      <div class="content">
+          <h2 class="item--name">{{ item.name }}</h2>
+          <p class="item--description">{{ item.description }}</p>
+          <p class="item--price">{{ item.price | currency}}</p>
+      </div>
   </div>
 </template>
 
@@ -68,6 +72,39 @@ export default {
         color: @yellow;
         margin: 0;
         padding: 10px;
+    }
+    @media @tablets{
+        width: 100%;
+        height: fit-content;
+        border: 1px solid @light-grey;
+        display: flex;
+        margin: 10px;
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        &--tag{
+            position: static;
+            order: 1;
+            width: fit-content;
+
+        }
+        &--img{
+            order: 0;
+            margin: 10px 10px;
+        }
+        img{
+            height: 60px;
+            width: auto;
+        }
+        &--price{
+            text-align: right;
+            margin: 0 auto;
+            padding: 5px 10px 10px;
+        }
+
     }
 }
 </style>
