@@ -56,9 +56,9 @@ export default {
   margin: 50px;
   display: flex;
   width: 100%;
-  @media @tablets {
+  @media @smartphones {
     flex-wrap: wrap;
-    margin: 20px 10px;
+    margin: 10px 0;
   }
 }
 </style>

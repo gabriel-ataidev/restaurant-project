@@ -41,9 +41,12 @@ export default {
   width: 216px;
   height: fit-content;
   border-radius: 10px;
+  border: 1px solid @light-grey;
   background: white;
   position: relative;
   margin: 20px;
+  display: flex;
+  flex-direction: column;
   &--tag {
     position: absolute;
     background: @pink;
@@ -57,7 +60,7 @@ export default {
   }
   &--img {
     display: block;
-    margin: 30px auto;
+    margin: 25px auto 15px;
     width: 100%;
   }
   img {
@@ -82,12 +85,20 @@ export default {
     margin: 0;
     padding: 10px;
   }
+  .content{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  }
+
+
   @media @tablets {
     width: 100%;
     height: fit-content;
     border: 1px solid @light-grey;
     display: flex;
-    margin: 10px;
+    flex-direction: row;
+    margin: 5px 10px;
     .container {
       display: flex;
       flex-direction: column;
@@ -98,6 +109,7 @@ export default {
       position: static;
       order: 1;
       width: fit-content;
+      margin-bottom: 10px;
     }
     &--img {
       order: 0;
@@ -107,9 +119,12 @@ export default {
       height: 60px;
       width: auto;
     }
+    .content{
+        flex-grow: 1;
+    }
     &--price {
       text-align: right;
-      margin: 0 auto;
+      margin: 0 0 0 auto;
       padding: 5px 10px 10px;
     }
   }
