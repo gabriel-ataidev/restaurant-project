@@ -1,5 +1,5 @@
 <template>
-  <div class="loading"></div>
+        <div class="loading"></div>
 </template>
 
 <script>
@@ -16,11 +16,11 @@ export default {
     border-radius: 50%;
     border-top-color: @yellow;
     animation: spin 1s linear infinite;
+    margin: auto;
 }
 @keyframes spin {
     to {
         transform: rotate(360deg);
     }
 }
-
 </style>
