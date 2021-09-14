@@ -1,5 +1,8 @@
 <template>
   <div class="item">
+    <div class="item--quantity">
+      
+    </div>
     <div class="item--img-container">
       <img class="item--img" :src="imagePath" />
     </div>
