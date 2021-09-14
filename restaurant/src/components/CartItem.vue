@@ -1,7 +1,9 @@
 <template>
   <div class="item">
     <div class="item--quantity">
-      
+      <span class="buttons">-</span>
+      <span class="number">{{ item.quantity }}</span>
+      <span class="buttons">+</span>
     </div>
     <div class="item--img-container">
       <img class="item--img" :src="imagePath" />
@@ -39,7 +41,19 @@ export default {
 .item {
   display: flex;
   margin: 15px 0;
-
+  &--quantity{
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    .number{
+      color: @yellow;
+      padding: 10px;
+      text-align: center;
+    }
+    .buttons{
+      cursor: pointer;
+    }
+  }
   &--img-container {
     background: purple;
     border-radius: 10px;
@@ -50,34 +64,34 @@ export default {
     display: flex;
     align-items: center;
     img {
-        width: 65px;
-        height: 50px;
-        margin: auto;
+      width: 65px;
+      height: 50px;
+      margin: auto;
     }
   }
-  .content{
-      flex-grow: 1;
-      padding: 0 10px;
+  .content {
+    flex-grow: 1;
+    padding: 0 10px;
   }
-  &--name{
-      margin: 0;
-      font-size: 18px;
-      font-weight: 600;
+  &--name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
   }
-  &--observation{
-      font-weight: 500;
-      font-size: 12px;
-      color: @dark-grey;
+  &--observation {
+    font-weight: 500;
+    font-size: 12px;
+    color: @dark-grey;
   }
-  &--price{
-      color: @yellow;
-      font-weight: 600;
-      line-height: 20px;
-      font-size: 18px;
+  &--price {
+    color: @yellow;
+    font-weight: 600;
+    line-height: 20px;
+    font-size: 18px;
   }
-  & + &{
-      border-top: 1px solid @light-grey;
-      padding-top: 15px;
+  & + & {
+    border-top: 1px solid @light-grey;
+    padding-top: 15px;
   }
 }
 </style>
