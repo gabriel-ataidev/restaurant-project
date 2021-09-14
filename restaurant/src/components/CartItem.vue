@@ -36,6 +36,48 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.item {
+  display: flex;
+  margin: 15px 0;
 
+  &--img-container {
+    background: purple;
+    border-radius: 10px;
+    background: @light-yellow;
+    height: fit-content;
+    padding: 4px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    img {
+        width: 65px;
+        height: 50px;
+        margin: auto;
+    }
+  }
+  .content{
+      flex-grow: 1;
+      padding: 0 10px;
+  }
+  &--name{
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+  }
+  &--observation{
+      font-weight: 500;
+      font-size: 12px;
+      color: @dark-grey;
+  }
+  &--price{
+      color: @yellow;
+      font-weight: 600;
+      line-height: 20px;
+      font-size: 18px;
+  }
+  & + &{
+      border-top: 1px solid @light-grey;
+      padding-top: 15px;
+  }
 }
 </style>
