@@ -26,7 +26,7 @@ export default {
   },
   filters: {
     currency(value) {
-      return `R$ ${value.toLocaleString("pt-br", {
+      return `R$${value.toLocaleString("pt-br", {
         minimumFractionDigits: 2,
       })}`;
     },
