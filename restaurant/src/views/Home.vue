@@ -1,8 +1,11 @@
 <template>
   <div class="home">
+    <div class="cart-icon" v-if="isSmallScreens()">
+      <CartIcon />
+    </div>
     <CategoryMenu />
     <ItemsList />
-    <Cart v-if="isDesktop()"/>
+    <Cart v-if="isDesktop()" />
   </div>
 </template>
 
@@ -11,7 +14,9 @@
 import CategoryMenu from "@/components/CategoryMenu.vue";
 import ItemsList from "@/components/ItemsList.vue";
 import Cart from "@/components/Cart.vue";
-import Mixin from '@/mixins/mixins';
+import Mixin from "@/mixins/mixins";
+
+import CartIcon from "@/assets/icons/cart.svg";
 
 export default {
   name: "Home",
@@ -19,16 +24,12 @@ export default {
     CategoryMenu,
     ItemsList,
     Cart,
+    CartIcon,
   },
-  mixins: [Mixin]
+  mixins: [Mixin],
 };
 </script>
 
 <style scoped lang="less">
-.home {
-  display: flex;
-  @media @tablets{
-    flex-direction: column;
-  }
-}
+
 </style>
