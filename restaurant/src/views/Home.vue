@@ -31,5 +31,21 @@ export default {
 </script>
 
 <style scoped lang="less">
-
+.home {
+  display: flex;
+  .cart-icon {
+    width: 50px;
+    height: 50px;
+    background: @pink;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin: 20px 20px 20px auto;
+  }
+  @media @tablets {
+    flex-direction: column;
+  }
+}
 </style>
