@@ -1,5 +1,5 @@
 <template>
-  <div class="item" @click="addToCart">
+  <div class="item" @click="addToCart()">
     <div class="container">
       <div class="item--tag" v-if="item.offer">Oferta</div>
       <img class="item--img" :src="imagePath" />
@@ -13,8 +13,11 @@
 </template>
 
 <script>
+import Mixin from "@/mixins/mixins";
+
 export default {
   name: "Item",
+  mixins: [Mixin],
   filters: {
     currency(value) {
       return `R$ ${value.toLocaleString("pt-br", {
@@ -32,9 +35,13 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.dispatch('addToCart', this.item);
-    }
-  }
+      this.$store.dispatch("AddToCart", this.item);
+      if (this.isDesktop()) return;
+
+      //if it's mobile
+      this.$router.push({ name: "AddToCart", params: { id: this.item.id } });
+    },
+  },
 };
 </script>
 
@@ -88,12 +95,11 @@ export default {
     margin: 0;
     padding: 10px;
   }
-  .content{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-
 
   @media @tablets {
     width: 100%;
@@ -122,8 +128,8 @@ export default {
       height: 60px;
       width: auto;
     }
-    .content{
-        flex-grow: 1;
+    .content {
+      flex-grow: 1;
     }
     &--price {
       text-align: right;
