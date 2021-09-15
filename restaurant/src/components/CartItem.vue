@@ -109,5 +109,28 @@ export default {
     border-top: 1px solid @light-grey;
     padding-top: 15px;
   }
+  @media @tablets{
+    flex-wrap: wrap;
+    &--img-container{
+      order: 1;
+    }
+    .content{
+      order: 2;
+    }
+    &--quantity{
+      order: 3;
+      padding-left: 15px;
+      padding-right: 100px;
+      margin-right: auto;
+      justify-content: center;
+    }
+    &--price{
+      order: 4;
+      padding-left: 25px;
+    }
+    & + & {
+    padding-top: 30px;
+    }
+  }
 }
 </style>
