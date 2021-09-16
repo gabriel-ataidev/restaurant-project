@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     addToCart() {
-      this.$store.dispatch("AddToCart", this.item);
+      this.$store.dispatch("addToCart", this.item);
       if (this.isDesktop()) return;
 
       //if it's mobile
