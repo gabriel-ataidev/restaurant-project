@@ -1,17 +1,34 @@
 <template>
   <div class="item--quantity">
-    <button class="buttons" @click="onDecreaseButtonClick" :disabled="item.quantity == 0">
+    <button
+      class="buttons"
+      @click="onDecreaseButtonClick"
+      :disabled="item.quantity == 0"
+    >
       -
     </button>
     <span class="number">{{ item.quantity }}</span>
     <button class="buttons" @click="onincreaseButtonClick()">+</button>
+    <Modal :show="showModal">
+      <div class="modal--content">
+        <h2>Deseja remover este item do carrinho?</h2>
+        <div class="buttons">
+          <button class="secondary-button">Sim, remover.</button>
+          <button class="primary-button">Voltar ao carrinho.</button>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import Modal from "./Modal.vue";
 
 export default {
+  components: {
+    Modal,
+  },
   props: {
     item: {},
     useStore: {
@@ -19,11 +36,17 @@ export default {
       default: true,
     },
   },
+  data() {
+    return {
+      showModal: false,
+    };
+  },
   methods: {
     ...mapActions(["increaseQuantity", "decreaseQuantity"]),
     onDecreaseButtonClick() {
       if (this.useStore) {
         this.decreaseQuantity(this.item.id);
+        if (!this.item.quantity) this.showModal = true;
         return;
       }
       --this.item.quantity;
@@ -34,7 +57,7 @@ export default {
         return;
       }
       ++this.item.quantity;
-    }
+    },
   },
 };
 </script>
@@ -58,6 +81,18 @@ export default {
     outline: none;
     :focus {
       outline: 0;
+    }
+  }
+  .modal--content{
+    text-align: center;
+    .buttons{
+      text-align: center;
+      button{
+        cursor: pointer;
+      }
+      button + button{
+        margin-left: 30px;
+      }
     }
   }
 }
