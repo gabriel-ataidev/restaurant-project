@@ -25,4 +25,26 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="less">
+.item--quantity {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  .number {
+    color: @yellow;
+    padding: 10px;
+    text-align: center;
+  }
+  .buttons {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+    background: none;
+    border: 0;
+    outline: none;
+    :focus {
+      outline: 0;
+    }
+  }
+}
+</style>
