@@ -3,7 +3,9 @@
     <router-link to="/" class="cart--go-back" v-if="isSmallScreens()"> ←️ Continuar comprando</router-link>
     <h2 class="cart--title">Seu pedido</h2>
     <p v-if="hasNoItem">Seu carrinho ainda está vazio.</p>
-    <CartItem v-for="item in cartList" :key="item.id" :item="item" />
+    <transition-group name="list">
+      <CartItem v-for="item in cartList" :key="item.id" :item="item" />
+    </transition-group>
     <div class="cart--total" v-if="!hasNoItem">
       <span class="total">Total: </span>
       <span class="price">{{getCartTotal | currency}}</span>
@@ -79,5 +81,12 @@ export default {
     min-width: unset;
     padding: 50px 20px;
   }
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
