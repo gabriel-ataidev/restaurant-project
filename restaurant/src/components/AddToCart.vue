@@ -8,10 +8,9 @@
       <span>Quantidade</span>
       <Quantity :item="item" :useStore="false" />
     </div>
-    <div>
       <p class="add-cart--observations">Observações:</p>
       <textarea v-model="observations" rows="10"></textarea>
-    </div>
+      <button>Adicionar ao carrinho</button>
   </div>
 </template>
 
@@ -83,6 +82,13 @@ export default {
       border: 1px solid @light-grey;
       padding: 10px;
       font-size: 16px;
+  }
+  button{
+    width: calc(100% - 40px);
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    right: 20px;
   }
 }
 </style>
