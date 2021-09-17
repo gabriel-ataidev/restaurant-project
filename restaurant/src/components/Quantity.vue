@@ -13,8 +13,12 @@
       <div class="modal--content">
         <h2>Deseja remover este item do carrinho?</h2>
         <div class="buttons">
-          <button class="secondary-button">Sim, remover.</button>
-          <button class="primary-button">Voltar ao carrinho.</button>
+          <button class="secondary-button" @click="onRemoveButtonClick">
+            Sim, remover.
+          </button>
+          <button class="primary-button" @click="onCancelButtonClick">
+            Voltar ao carrinho.
+          </button>
         </div>
       </div>
     </Modal>
@@ -58,6 +62,16 @@ export default {
       }
       ++this.item.quantity;
     },
+    onCancelButtonClick() {
+      this.increaseQuantity(this.item.id);
+      this.showModal = false;
+    },
+    onRemoveButtonClick() {
+      this.showModal = false;
+      this.$nextTick(() => {
+        this.$store.dispatch("removeFromCart", this.item.id);
+      });
+    },
   },
 };
 </script>
@@ -83,14 +97,14 @@ export default {
       outline: 0;
     }
   }
-  .modal--content{
+  .modal--content {
     text-align: center;
-    .buttons{
+    .buttons {
       text-align: center;
-      button{
+      button {
         cursor: pointer;
       }
-      button + button{
+      button + button {
         margin-left: 30px;
       }
     }
