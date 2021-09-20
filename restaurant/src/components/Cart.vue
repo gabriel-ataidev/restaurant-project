@@ -1,23 +1,28 @@
 <template>
   <div class="cart">
-    <router-link to="/" class="cart--go-back" v-if="isSmallScreens()"> ←️ Continuar comprando</router-link>
+    <router-link to="/" class="cart--go-back" v-if="isSmallScreens()">
+      ←️ Continuar comprando</router-link
+    >
     <h2 class="cart--title">Seu pedido</h2>
-    <p v-if="hasNoItem">Seu carrinho ainda está vazio.</p>
-    <transition-group name="list">
-      <CartItem v-for="item in cartList" :key="item.id" :item="item" />
-    </transition-group>
-    <div class="cart--total" v-if="!hasNoItem">
-      <span class="total">Total: </span>
-      <span class="price">{{getCartTotal | currency}}</span>
+    <div class="cart--content">
+      <p v-if="hasNoItem">Seu carrinho ainda está vazio.</p>
+      <transition-group name="list">
+        <CartItem v-for="item in cartList" :key="item.id" :item="item" />
+      </transition-group>
     </div>
+      <div class="cart--total" v-if="!hasNoItem">
+        <span class="total">Total: </span>
+        <span class="price">{{ getCartTotal | currency }}</span>
+      </div>
+    <button class="primary-button payment-button" @click="goToPayment">Finalizar pedido</button>
   </div>
 </template>
 
 <script>
 import CartItem from "./CartItem";
-import { mapGetters } from 'vuex';
-import Mixin from '@/mixins/mixins';
-import feather from 'feather-icons';
+import { mapGetters } from "vuex";
+import Mixin from "@/mixins/mixins";
+import feather from "feather-icons";
 
 export default {
   name: "Cart",
@@ -33,9 +38,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
-      'getCartTotal'
-    ]),
+    ...mapGetters(["getCartTotal"]),
     cartList() {
       return this.$store.state.cartList;
     },
@@ -44,8 +47,13 @@ export default {
     },
     circleIcon() {
       return feather.icons.circle.toSvg();
-    }
+    },
   },
+  methods: {
+    goToPayment() {
+      this.$router.push({name: 'Payment'});
+    }
+  }
 };
 </script>
 
@@ -55,7 +63,10 @@ export default {
   width: 643px;
   min-width: 443px;
   padding: 25px;
-  &--go-back{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  &--go-back {
     font-weight: 600;
     font-size: 20px;
     color: @yellow;
@@ -66,31 +77,43 @@ export default {
     font-weight: 600;
     font-size: 24px;
   }
-  &--total{
-    margin-left: auto;
-    padding-top: 15px;
-    width: fit-content;
-    border-top: 1px solid @light-grey;
+  &--content {
+    flex: 1;
+    overflow: auto;
   }
-  .total{
-    font-weight: 800;
+    &--total {
+      margin: 10px 0 10px auto;
+      padding-top: 15px;
+      width: fit-content;
+      border-top: 1px solid @light-grey;
+    }
+    .total {
+      font-weight: 800;
+    }
+    .price {
+      color: @yellow;
+      font-size: 18px;
+      font-weight: 800;
+    }
+  .payment-button {
+    margin: 10px auto 0 auto;
+    padding: 10px 80px;
   }
-  .price{
-    color: @yellow;
-    font-size: 18px;
-    font-weight: 800;
+  .list-enter-active,
+  .list-leave-active {
+    transition: all 1s;
   }
-  @media @smartphones{
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  @media @smartphones {
     width: 100%;
     min-width: unset;
     padding: 50px 20px;
+    .payment-button {
+      margin: auto;
+    }
   }
-}
-.list-enter-active, .list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
 }
 </style>
