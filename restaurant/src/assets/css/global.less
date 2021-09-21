@@ -17,6 +17,19 @@ button, input, select, textarea{
 button{
     cursor: pointer;
 }
+input{
+    height: 47px;
+    border-radius: 10px;
+    border: 1px solid @dark-grey;
+    color: @dark-grey;
+    padding: 0 15px;
+    &.error{
+        border: 1px solid @error-color;
+        &::placeholder{
+            color: @error-color;
+        }
+    }
+}
 .primary-button{
     background: @pink;
     border: 0;
