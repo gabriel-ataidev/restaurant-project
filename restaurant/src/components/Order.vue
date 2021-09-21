@@ -46,5 +46,23 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.order {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px 50px;
+  margin: 30px auto;
+  form {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .error-message {
+      font-size: 12px;
+      color: @error-color;
+    }
+  }
+}
 </style>
