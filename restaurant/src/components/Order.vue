@@ -44,15 +44,21 @@
             <label for="delivery">Delivery</label>
           </div>
         </div>
-        <a>Adicionar endereço</a>
+        <a @click="onShowAddressModal">Adicionar endereço</a>
       </div>
     </form>
     <button class="primary-button" @click="orderItems">Concluir pedido</button>
+    <Modal :show="showAddressModal" @on-modal-close="hideAddressModal"></Modal>
   </div>
 </template>
 
 <script>
+import Modal from '@/components/Modal';
+
 export default {
+  components: {
+    Modal
+  },
   data() {
     return {
       formData: {
@@ -78,6 +84,7 @@ export default {
           },
         },
       },
+      showAddressModal: false,
     };
   },
   methods: {
@@ -88,6 +95,12 @@ export default {
     orderItems() {
       this.triggerValidations();
     },
+    onShowAddressModal() {
+      this.showAddressModal = true;
+    },
+    hideAddressModal() {
+      this.showAddressModal = false;
+    }
   },
 };
 </script>
