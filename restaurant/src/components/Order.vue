@@ -1,7 +1,7 @@
 <template>
   <div class="order">
     <form>
-      
+      <p class="section-title">Seus dados</p>
       <div class="input-field">
         <label for=""> {{ formData.name.label }} </label>
         <input
@@ -84,7 +84,11 @@ export default {
   form {
     display: flex;
     flex-direction: column;
-    
+    .section-title {
+      font-weight: 600;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
     .input-field {
       display: flex;
       flex-direction: column;
