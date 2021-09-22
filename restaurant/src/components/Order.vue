@@ -1,33 +1,50 @@
 <template>
   <div class="order">
     <form>
-      <p class="section-title">Seus dados</p>
-      <div class="input-field">
-        <label for=""> {{ formData.name.label }} </label>
-        <input
-          type="text"
-          :placeholder="formData.name.placeholder"
-          v-model="formData.name.value"
-          @blur="formData.name.isValid()"
-          :class="{ error: !formData.name.valid }"
-        />
-        <p class="error-message" v-if="!formData.name.valid">
-          {{ formData.name.errorMessage }}
-        </p>
+      <div class="user-data">
+        <p class="section-title">Seus dados</p>
+        <div class="input-field">
+          <label for=""> {{ formData.name.label }} </label>
+          <input
+            type="text"
+            :placeholder="formData.name.placeholder"
+            v-model="formData.name.value"
+            @blur="formData.name.isValid()"
+            :class="{ error: !formData.name.valid }"
+          />
+          <p class="error-message" v-if="!formData.name.valid">
+            {{ formData.name.errorMessage }}
+          </p>
+        </div>
+        <div class="input-field">
+          <label for=""> {{ formData.cellphone.label }} </label>
+          <input
+            type="text"
+            :placeholder="formData.cellphone.placeholder"
+            v-mask="'(##) # ####-####'"
+            v-model="formData.cellphone.value"
+            @blur="formData.cellphone.isValid()"
+            :class="{ error: !formData.cellphone.valid }"
+          />
+          <p class="error-message" v-if="!formData.cellphone.valid">
+            {{ formData.cellphone.errorMessage }}
+          </p>
+        </div>
       </div>
-      <div class="input-field">
-        <label for=""> {{ formData.cellphone.label }} </label>
-        <input
-          type="text"
-          :placeholder="formData.cellphone.placeholder"
-          v-mask="'(##) # ####-####'"
-          v-model="formData.cellphone.value"
-          @blur="formData.cellphone.isValid()"
-          :class="{ error: !formData.cellphone.valid }"
-        />
-        <p class="error-message" v-if="!formData.cellphone.valid">
-          {{ formData.cellphone.errorMessage }}
-        </p>
+      <div class="address">
+        <p class="section-title">Endereço</p>
+        <div class="delivery-type">
+          <div class="radio-option">
+            <input type="radio" id="store" name="delivery-type" checked />
+            <label for="store">Retirar na loja</label>
+          </div>
+
+          <div class="radio-option">
+            <input type="radio" id="delivery" name="delivery-type" />
+            <label for="delivery">Delivery</label>
+          </div>
+        </div>
+        <a>Adicionar endereço</a>
       </div>
     </form>
     <button class="primary-button" @click="orderItems">Concluir pedido</button>
@@ -105,6 +122,7 @@ export default {
       font-size: 12px;
       color: @error-color;
     }
+    
   }
   button {
     margin: 30px auto;
