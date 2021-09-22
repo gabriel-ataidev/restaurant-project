@@ -63,6 +63,7 @@ export default {
   methods: {
     triggerValidations() {
       this.formData.name.isValid();
+      this.formData.cellphone.isValid();
     },
     orderItems() {
       this.triggerValidations();
@@ -83,6 +84,9 @@ export default {
     .input-field{
       display: flex;
       flex-direction: column;
+      & + .input-field {
+        margin-top: 20px;
+      }
     }
     label {
       font-weight: 500;
