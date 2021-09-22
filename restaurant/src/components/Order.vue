@@ -48,16 +48,76 @@
       </div>
     </form>
     <button class="primary-button" @click="orderItems">Concluir pedido</button>
-    <Modal :show="showAddressModal" @on-modal-close="hideAddressModal"></Modal>
+    <Modal :show="showAddressModal" @on-modal-close="hideAddressModal">
+      <div class="modal-content">
+        <h1>Adicionar endereço</h1>
+        <div class="input-field">
+          <label for=""> {{ formData.cep.label }} </label>
+          <input
+            type="text"
+            :placeholder="formData.cep.placeholder"
+            v-model="formData.cep.value"
+            @blur="formData.cep.isValid()"
+            :class="{ error: !formData.cep.valid }"
+          />
+          <p class="error-message" v-if="!formData.cep.valid">
+            {{ formData.cep.errorMessage }}
+          </p>
+        </div>
+        <div class="input-field">
+          <label for=""> {{ formData.city.label }} </label>
+          <input
+            type="text"
+            :placeholder="formData.city.placeholder"
+            v-model="formData.city.value"
+            @blur="formData.city.isValid()"
+            :class="{ error: !formData.city.valid }"
+          />
+          <p class="error-message" v-if="!formData.city.valid">
+            {{ formData.city.errorMessage }}
+          </p>
+        </div>
+        <div class="address-container">
+          <div class="input-field">
+            <label for=""> {{ formData.street.label }} </label>
+            <input
+              type="text"
+              :placeholder="formData.street.placeholder"
+              v-model="formData.street.value"
+              @blur="formData.street.isValid()"
+              :class="{ error: !formData.street.valid }"
+            />
+            <p class="error-message" v-if="!formData.street.valid">
+              {{ formData.street.errorMessage }}
+            </p>
+          </div>
+          <div class="input-field">
+            <label for=""> {{ formData.number.label }} </label>
+            <input
+              type="text"
+              :placeholder="formData.number.placeholder"
+              v-model="formData.number.value"
+              @blur="formData.number.isValid()"
+              :class="{ error: !formData.number.valid }"
+            />
+            <p class="error-message" v-if="!formData.number.valid">
+              {{ formData.number.errorMessage }}
+            </p>
+          </div>
+        </div>
+        <button class="secondary-button" @click="hideAddressModal">Cancelar</button>
+        <button class="primary-button">Adicionar</button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
-import Modal from '@/components/Modal';
+import Modal from "@/components/Modal";
 
 export default {
   components: {
-    Modal
+    Modal,
   },
   data() {
     return {
@@ -83,6 +143,46 @@ export default {
               this.formData.cellphone.value.length === 16;
           },
         },
+        cep: {
+          value: "",
+          placeholder: "Digite seu cep",
+          errorMessage: "O cep é obrigatório",
+          label: "CEP*",
+          valid: true,
+          isValid: () => {
+            this.formData.cep.valid = this.formData.cep.value.length;
+          },
+        },
+        city: {
+          value: "",
+          placeholder: "Digite seu cidade",
+          errorMessage: "A cidade é obrigatória",
+          label: "Cidade*",
+          valid: true,
+          isValid: () => {
+            this.formData.city.valid = this.formData.city.value.length;
+          },
+        },
+        street: {
+          value: "",
+          placeholder: "Digite sua rua",
+          errorMessage: "A rua é obrigatória",
+          label: "Rua*",
+          valid: true,
+          isValid: () => {
+            this.formData.street.valid = this.formData.city.value.length;
+          },
+        },
+        number: {
+          value: "",
+          placeholder: "Digite seu número",
+          errorMessage: "O número é obrigatório",
+          label: "Número*",
+          valid: true,
+          isValid: () => {
+            this.formData.number.valid = this.formData.city.value.length;
+          },
+        },
       },
       showAddressModal: false,
     };
@@ -100,7 +200,7 @@ export default {
     },
     hideAddressModal() {
       this.showAddressModal = false;
-    }
+    },
   },
 };
 </script>
@@ -111,6 +211,29 @@ export default {
   border-radius: 10px;
   padding: 30px 50px;
   margin: 30px auto;
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    & + .input-field {
+      margin-top: 20px;
+      label {
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+  }
+  .address-container{
+    display: flex;
+    margin-top: 15px;
+    .input-field{
+      margin: 0;
+      width: 100%;
+      & + .input-field{
+        width: 30%;
+        margin-left: 15px;
+      }
+    }
+  }
   form {
     display: flex;
     flex-direction: column;
@@ -118,18 +241,6 @@ export default {
       font-weight: 600;
       font-size: 22px;
       margin-bottom: 20px;
-    }
-    .input-field {
-      display: flex;
-      flex-direction: column;
-      & + .input-field {
-        margin-top: 20px;
-      }
-    }
-    label {
-      font-weight: 500;
-      font-size: 16px;
-      margin-bottom: 5px;
     }
     .error-message {
       font-size: 12px;
@@ -139,7 +250,7 @@ export default {
       .delivery-type {
         display: flex;
       }
-      a{
+      a {
         color: @pink;
         font-weight: normal;
         font-size: 12px;
@@ -160,6 +271,15 @@ export default {
   }
   button {
     margin: 30px auto;
+  }
+  .modal-content{
+    button{
+      text-align: center;
+      justify-content: center;
+      & + button{
+        margin-left: 15px;
+      }
+    }
   }
 }
 </style>
