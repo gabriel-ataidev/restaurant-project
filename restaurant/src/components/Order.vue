@@ -1,6 +1,7 @@
 <template>
   <div class="order">
     <form>
+      
       <div class="input-field">
         <label for=""> {{ formData.name.label }} </label>
         <input
@@ -19,6 +20,7 @@
         <input
           type="text"
           :placeholder="formData.cellphone.placeholder"
+          v-mask="'(##) # ####-####'"
           v-model="formData.cellphone.value"
           @blur="formData.cellphone.isValid()"
           :class="{ error: !formData.cellphone.valid }"
@@ -54,7 +56,8 @@ export default {
           label: "Celular*",
           valid: true,
           isValid: () => {
-            this.formData.cellphone.valid = (this.formData.cellphone.value.length === 9);
+            this.formData.cellphone.valid =
+              this.formData.cellphone.value.length === 16;
           },
         },
       },
@@ -81,7 +84,8 @@ export default {
   form {
     display: flex;
     flex-direction: column;
-    .input-field{
+    
+    .input-field {
       display: flex;
       flex-direction: column;
       & + .input-field {
@@ -98,7 +102,7 @@ export default {
       color: @error-color;
     }
   }
-  button{
+  button {
     margin: 30px auto;
   }
 }
