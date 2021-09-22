@@ -122,7 +122,28 @@ export default {
       font-size: 12px;
       color: @error-color;
     }
-    
+    .address {
+      .delivery-type {
+        display: flex;
+      }
+      a{
+        color: @pink;
+        font-weight: normal;
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+      .radio-option {
+        display: flex;
+        align-items: center;
+        label {
+          padding-left: 10px;
+        }
+        & + .radio-option {
+          margin-left: 25px;
+        }
+      }
+    }
   }
   button {
     margin: 30px auto;
