@@ -169,7 +169,16 @@
     >
       <div class="invalid-address-modal">
         <span v-html="warningIcon" class="icon"></span>
-        <span>Na modalidade delivery, é necessário adicionar um endereço válido.</span>
+        <span
+          >Na modalidade delivery, é necessário adicionar um endereço
+          válido.</span
+        >
+      </div>
+    </Modal>
+    <Modal :show="showSuccessModal" @on-modal-close="hideSuccessModal">
+      <div class="success-modal">
+        <span v-html="successIcon" class="icon"></span>
+        <span>Pedido realizado com sucesso!</span>
       </div>
     </Modal>
   </div>
@@ -250,12 +259,16 @@ export default {
       },
       showAddressModal: false,
       showInvalidAddressModal: false,
+      showSuccessModal: false,
       deliveryType: "delivery",
       paymentType: "credit-card",
       savedAddress: false,
     };
   },
   computed: {
+    successIcon() {
+      return feather.icons["check-circle"].toSvg();
+    },
     warningIcon() {
       return feather.icons["alert-triangle"].toSvg();
     },
@@ -265,6 +278,12 @@ export default {
       isValid &= this.formData.city.valid;
       isValid &= this.formData.street.valid;
       isValid &= this.formData.number.valid;
+      return isValid;
+    },
+    isUserFormDataValid() {
+      let isValid = true;
+      isValid &= this.formData.cellphone.valid;
+      isValid &= this.formData.name.valid;
       return isValid;
     },
     isDeliveryType() {
@@ -299,12 +318,17 @@ export default {
     },
     orderItems() {
       this.triggerValidations();
+      if(!this.isUserFormDataValid || !this.isAddressFormValid) return;
+      this.showSuccessModal = true
     },
     onShowAddressModal() {
       this.showAddressModal = true;
     },
     hideAddressModal() {
       this.showAddressModal = false;
+    },
+    hideSuccessModal() {
+      this.$router.push({name: 'Home'});
     },
     validateAddressForm() {
       this.triggerAddressFormValidations();
@@ -414,12 +438,12 @@ export default {
       }
     }
   }
-  .invalid-address-modal {
+  .invalid-address-modal, .success-modal {
     display: flex;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    .icon{
+    .icon {
       margin-bottom: 15px;
     }
   }
