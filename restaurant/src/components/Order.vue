@@ -95,7 +95,9 @@
         </div>
       </div>
     </form>
-    <button class="primary-button finalize-order" @click="orderItems">Concluir pedido</button>
+    <button class="primary-button finalize-order" @click="orderItems">
+      Concluir pedido
+    </button>
     <Modal :show="showAddressModal" @on-modal-close="hideAddressModal">
       <div class="modal-content">
         <h1>Adicionar endereço</h1>
@@ -161,16 +163,21 @@
         </button>
       </div>
     </Modal>
-    <Modal :show="showInvalidAddressModal" @on-modal-close="hideInvalidAddressModal">
-      <span v-html="warningIcon"></span>
-      <span>Na modalidade delivery, é necessário adicionar um endereço válido.</span>
+    <Modal
+      :show="showInvalidAddressModal"
+      @on-modal-close="hideInvalidAddressModal"
+    >
+      <div class="invalid-address-modal">
+        <span v-html="warningIcon" class="icon"></span>
+        <span>Na modalidade delivery, é necessário adicionar um endereço válido.</span>
+      </div>
     </Modal>
   </div>
 </template>
 
 <script>
 import Modal from "@/components/Modal";
-import feather from 'feather-icons';
+import feather from "feather-icons";
 
 export default {
   components: {
@@ -250,7 +257,7 @@ export default {
   },
   computed: {
     warningIcon() {
-      return feather.icons['alert-triangle'].toSvg();
+      return feather.icons["alert-triangle"].toSvg();
     },
     isAddressFormValid() {
       let isValid = true;
@@ -279,7 +286,7 @@ export default {
     triggerValidations() {
       this.formData.name.isValid();
       this.formData.cellphone.isValid();
-      if(this.isDeliveryType) {
+      if (this.isDeliveryType) {
         this.triggerAddressFormValidations();
         this.showInvalidAddressModal = !this.isAddressFormValid;
       }
@@ -306,7 +313,7 @@ export default {
       this.showAddressModal = false;
     },
     hideInvalidAddressModal() {
-      this.showInvalidAddressModal = false
+      this.showInvalidAddressModal = false;
     },
   },
 };
@@ -407,6 +414,15 @@ export default {
       }
     }
   }
+  .invalid-address-modal {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    .icon{
+      margin-bottom: 15px;
+    }
+  }
   @media @tablets {
     width: 100%;
     padding: 20px;
@@ -424,10 +440,10 @@ export default {
         margin-left: 5px;
       }
     }
-        .finalize-order{
-          display: flex;
-          text-align: center;
-        }
+    .finalize-order {
+      display: flex;
+      text-align: center;
+    }
   }
 }
 </style>
