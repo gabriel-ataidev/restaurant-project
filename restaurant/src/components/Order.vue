@@ -95,7 +95,9 @@
         </div>
       </div>
     </form>
-    <button class="primary-button" @click="orderItems">Concluir pedido</button>
+    <button class="primary-button finalize-order" @click="orderItems">
+      Concluir pedido
+    </button>
     <Modal :show="showAddressModal" @on-modal-close="hideAddressModal">
       <div class="modal-content">
         <h1>Adicionar endereço</h1>
@@ -227,7 +229,7 @@ export default {
         },
         number: {
           value: "",
-          placeholder: "Digite seu número",
+          placeholder: "Digite o número",
           errorMessage: "O número é obrigatório",
           label: "Número*",
           valid: true,
@@ -389,6 +391,28 @@ export default {
       & + button {
         margin-left: 15px;
       }
+    }
+  }
+  @media @tablets {
+    width: 100%;
+    padding: 20px;
+    .modal-content {
+      button {
+        text-align: center;
+        justify-content: center;
+        & + button {
+          margin-left: 5px;
+        }
+      }
+    }
+    .address-container {
+      .input-field + .input-field {
+        margin-left: 5px;
+      }
+    }
+    .finalize-order {
+      display: flex;
+      text-align: center;
     }
   }
 }

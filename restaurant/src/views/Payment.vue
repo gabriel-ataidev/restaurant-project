@@ -35,5 +35,11 @@ export default {
       text-decoration: none;
     }
   }
+  @media @tablets{
+    &--content{
+      padding: 50px 20px;
+      
+    }
+  }
 }
 </style>
