@@ -161,11 +161,16 @@
         </button>
       </div>
     </Modal>
+    <Modal :show="showInvalidAddressModal" @on-modal-close="hideInvalidAddressModal">
+      <span v-html="warningIcon"></span>
+      <span>Na modalidade delivery, é necessário adicionar um endereço válido.</span>
+    </Modal>
   </div>
 </template>
 
 <script>
 import Modal from "@/components/Modal";
+import feather from 'feather-icons';
 
 export default {
   components: {
@@ -244,6 +249,9 @@ export default {
     };
   },
   computed: {
+    warningIcon() {
+      return feather.icons['alert-triangle'].toSvg();
+    },
     isAddressFormValid() {
       let isValid = true;
       isValid &= this.formData.cep.valid;
