@@ -95,9 +95,7 @@
         </div>
       </div>
     </form>
-    <button class="primary-button finalize-order" @click="orderItems">
-      Concluir pedido
-    </button>
+    <button class="primary-button finalize-order" @click="orderItems">Concluir pedido</button>
     <Modal :show="showAddressModal" @on-modal-close="hideAddressModal">
       <div class="modal-content">
         <h1>Adicionar endereço</h1>
@@ -239,6 +237,7 @@ export default {
         },
       },
       showAddressModal: false,
+      showInvalidAddressModal: false,
       deliveryType: "delivery",
       paymentType: "credit-card",
       savedAddress: false,
@@ -272,6 +271,10 @@ export default {
     triggerValidations() {
       this.formData.name.isValid();
       this.formData.cellphone.isValid();
+      if(this.isDeliveryType) {
+        this.triggerAddressFormValidations();
+        this.showInvalidAddressModal = !this.isAddressFormValid;
+      }
     },
     triggerAddressFormValidations() {
       this.formData.cep.isValid();
@@ -293,6 +296,9 @@ export default {
       if (!this.isAddressFormValid) return;
       this.savedAddress = true;
       this.showAddressModal = false;
+    },
+    hideInvalidAddressModal() {
+      this.showInvalidAddressModal = false
     },
   },
 };
@@ -410,10 +416,10 @@ export default {
         margin-left: 5px;
       }
     }
-    .finalize-order {
-      display: flex;
-      text-align: center;
-    }
+        .finalize-order{
+          display: flex;
+          text-align: center;
+        }
   }
 }
 </style>
