@@ -33,7 +33,7 @@
       </div>
       <div class="address">
         <p class="section-title">Endereço</p>
-        <div class="delivery-type">
+        <div class="radio-container">
           <div class="radio-option">
             <input
               type="radio"
@@ -56,7 +56,10 @@
             <label for="delivery">Delivery</label>
           </div>
         </div>
-        <div class="address-card" v-if="isDeliveryType && hasAddressInfo && savedAddress">
+        <div
+          class="address-card"
+          v-if="isDeliveryType && hasAddressInfo && savedAddress"
+        >
           <p>{{ formData.street.value }}, {{ formData.number.value }}</p>
           <p>{{ formData.city.value }}</p>
           <p>{{ formData.cep.value }}</p>
@@ -64,6 +67,32 @@
         <a @click="onShowAddressModal" v-if="isDeliveryType">
           {{ addressButtonLabel }}
         </a>
+      </div>
+      <div class="payment">
+        <p class="section-title">Pagamento</p>
+        <p>Método de pagamento</p>
+        <div class="radio-container">
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="credit-card"
+              name="payment-type"
+              value="credit-card"
+              v-model="paymentType"
+            />
+            <label for="credit-card">Cartão</label>
+          </div>
+          <div class="radio-option">
+            <input
+              type="radio"
+              id="cash"
+              name="payment-type"
+              value="cash"
+              v-model="paymentType"
+            />
+            <label for="cash">Dinheiro</label>
+          </div>
+        </div>
       </div>
     </form>
     <button class="primary-button" @click="orderItems">Concluir pedido</button>
@@ -209,7 +238,8 @@ export default {
       },
       showAddressModal: false,
       deliveryType: "delivery",
-      savedAddress: false
+      paymentType: "credit-card",
+      savedAddress: false,
     };
   },
   computed: {
@@ -311,10 +341,20 @@ export default {
       font-size: 12px;
       color: @error-color;
     }
-    .address {
-      .delivery-type {
-        display: flex;
+    .radio-container {
+      display: flex;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      label {
+        padding-left: 10px;
       }
+      & + .radio-option {
+        margin-left: 25px;
+      }
+    }
+    .address {
       a {
         color: @pink;
         font-weight: normal;
@@ -324,16 +364,6 @@ export default {
         margin: 15px 0;
         display: block;
         width: fit-content;
-      }
-      .radio-option {
-        display: flex;
-        align-items: center;
-        label {
-          padding-left: 10px;
-        }
-        & + .radio-option {
-          margin-left: 25px;
-        }
       }
       .address-card {
         border-radius: 10px;
