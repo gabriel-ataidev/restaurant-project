@@ -318,8 +318,22 @@ export default {
     },
     orderItems() {
       this.triggerValidations();
-      if(!this.isUserFormDataValid || !this.isAddressFormValid) return;
-      this.showSuccessModal = true
+      if (!this.isUserFormDataValid || !this.isAddressFormValid) return;
+      this.showSuccessModal = true;
+      const phone = "5512982001122";
+      let text = `
+        Cliente: ${this.formData.name.value}
+        Contato: ${this.formData.cellphone.value}
+        Pedido:
+          ${this.$store.state.cartList.map((item) => {
+            return `
+              ${item.quantity}x ${item.name}
+              Obs: ${item.observations}
+            `;
+          })}
+      `;
+      text = window.encodeURIComponent(text);
+      window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${text}`);
     },
     onShowAddressModal() {
       this.showAddressModal = true;
@@ -328,7 +342,7 @@ export default {
       this.showAddressModal = false;
     },
     hideSuccessModal() {
-      this.$router.push({name: 'Home'});
+      this.$router.push({ name: "Home" });
     },
     validateAddressForm() {
       this.triggerAddressFormValidations();
@@ -438,7 +452,8 @@ export default {
       }
     }
   }
-  .invalid-address-modal, .success-modal {
+  .invalid-address-modal,
+  .success-modal {
     display: flex;
     align-items: center;
     flex-direction: column;
