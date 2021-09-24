@@ -105,7 +105,7 @@ export default {
     justify-content: space-between;
   }
 
-  @media @tablets {
+  @media @smartphones {
     width: 100%;
     height: fit-content;
     border: 1px solid @light-grey;

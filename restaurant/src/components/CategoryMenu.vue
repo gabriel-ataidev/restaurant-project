@@ -98,16 +98,25 @@ export default {
     }
   }
 
-  @media @smartphones {
+  @media @small-desktops {
     width: 100%;
+    max-width: 800px;
+    margin: auto;
     height: fit-content;
     ul{
       display: flex;
       margin: 10px;
       overflow: scroll;
+      justify-content: space-around;
+      overflow: hidden;
       li{
         min-width: 78px;
       }
+    }
+  }
+  @media @smartphones {
+    ul{
+      justify-content: unset;
     }
   }
 }
