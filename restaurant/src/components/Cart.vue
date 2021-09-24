@@ -1,6 +1,6 @@
 <template>
   <div class="cart">
-    <router-link to="/" class="cart--go-back" v-if="isSmallScreens()">
+    <router-link to="/" class="cart--go-back">
       ←️ Continuar comprando</router-link
     >
     <h2 class="cart--title">Seu pedido</h2>
@@ -71,6 +71,7 @@ export default {
     font-size: 20px;
     color: @yellow;
     text-decoration: none;
+    display: none;
   }
   &--title {
     margin-top: 40px;
@@ -107,12 +108,17 @@ export default {
     opacity: 0;
     transform: translateY(30px);
   }
-  @media @smartphones {
+  @media @small-desktops {
     width: 100%;
     min-width: unset;
+    max-width: 800px;
+    margin: auto;
     padding: 50px 20px;
     .payment-button {
       margin: auto;
+    }
+    &--cart-go-back{
+      display: block;
     }
   }
 }
