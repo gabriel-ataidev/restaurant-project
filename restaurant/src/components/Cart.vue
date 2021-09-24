@@ -10,11 +10,17 @@
         <CartItem v-for="item in cartList" :key="item.id" :item="item" />
       </transition-group>
     </div>
-      <div class="cart--total" v-if="!hasNoItem">
-        <span class="total">Total: </span>
-        <span class="price">{{ getCartTotal | currency }}</span>
-      </div>
-    <button class="primary-button payment-button" @click="goToPayment" v-if="cartList.length">Finalizar pedido</button>
+    <div class="cart--total" v-if="!hasNoItem">
+      <span class="total">Total: </span>
+      <span class="price">{{ getCartTotal | currency }}</span>
+    </div>
+    <button
+      class="primary-button payment-button"
+      @click="goToPayment"
+      v-if="cartList.length && !isPaymentScreen"
+    >
+      Finalizar pedido
+    </button>
   </div>
 </template>
 
@@ -48,12 +54,15 @@ export default {
     circleIcon() {
       return feather.icons.circle.toSvg();
     },
+    isPaymentScreen() {
+      return this.$route.name === "Payment";
+    },
   },
   methods: {
     goToPayment() {
-      this.$router.push({name: 'Payment'});
-    }
-  }
+      this.$router.push({ name: "Payment" });
+    },
+  },
 };
 </script>
 
@@ -82,20 +91,20 @@ export default {
     flex: 1;
     overflow: auto;
   }
-    &--total {
-      margin: 10px 0 10px auto;
-      padding-top: 15px;
-      width: fit-content;
-      border-top: 1px solid @light-grey;
-    }
-    .total {
-      font-weight: 800;
-    }
-    .price {
-      color: @yellow;
-      font-size: 18px;
-      font-weight: 800;
-    }
+  &--total {
+    margin: 10px 0 10px auto;
+    padding-top: 15px;
+    width: fit-content;
+    border-top: 1px solid @light-grey;
+  }
+  .total {
+    font-weight: 800;
+  }
+  .price {
+    color: @yellow;
+    font-size: 18px;
+    font-weight: 800;
+  }
   .payment-button {
     margin: 10px auto 0 auto;
     padding: 10px 80px;
@@ -117,7 +126,7 @@ export default {
     .payment-button {
       margin: auto;
     }
-    &--cart-go-back{
+    &--cart-go-back {
       display: block;
     }
   }

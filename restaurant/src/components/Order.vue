@@ -462,8 +462,9 @@ export default {
       margin-bottom: 15px;
     }
   }
-  @media @tablets {
+  @media @small-desktops {
     width: 100%;
+    max-width: 800px;
     padding: 20px;
     .modal-content {
       button {
@@ -484,5 +485,6 @@ export default {
       text-align: center;
     }
   }
+  
 }
 </style>
